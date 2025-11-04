@@ -1,4 +1,4 @@
-import express from "express"
+import express, { Router } from "express"
 import mongoose from "mongoose"
 import bodyParser from "body-parser"
 import dotenv from "dotenv"
@@ -11,7 +11,7 @@ app.use(bodyParser.json())
 
 dotenv.config()
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5001
 const MONGOURL = process.env.MONGO_URL
 
 mongoose.connect(MONGOURL).then(()=> {
@@ -23,3 +23,4 @@ mongoose.connect(MONGOURL).then(()=> {
 }).catch(error => console.log(error))
 
 app.use("/api/employees", route)
+
