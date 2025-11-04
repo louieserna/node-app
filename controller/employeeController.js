@@ -24,7 +24,7 @@ export const fetch = async(req, res) => {
     try {
        // res.json("Hello World")
        const employees = await Employee.find()
-       if(employees.lenght === 0){
+       if(employees.length === 0){
         return res.status(404).json({message: "Employees not found!"})
        }
 
@@ -65,3 +65,16 @@ export const update = async(req, res) => {
 //         res.status(500).json({error: "Internal Server Error"})
 //         }
 // }
+
+export const findEmployee = async(req, res) => {
+    try {
+        const id = req.params.id
+        const employeeExist = await Employee.findOne({_id:id})
+        if(!employeeExist) {
+            return res.status(404).json({message: "Employee Does Not Exist"})
+        }
+        res.status(200).json(employeeExist)
+    } catch (error) {
+        res.status(500).json({error: "Internal Server Error"})
+    }
+}
